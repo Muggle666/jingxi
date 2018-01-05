@@ -1,0 +1,6 @@
+com\jingxi\controller\ContentController.class
+com\jingxi\controller\ItemCatController.class
+com\jingxi\controller\ItemController.class
+com\jingxi\controller\ContentCategoryController.class
+com\jingxi\controller\ImageController.class
+com\jingxi\controller\IndexController.class

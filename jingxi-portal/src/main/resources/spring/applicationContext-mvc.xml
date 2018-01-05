@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:resource/*.properties" />
+
+	<context:component-scan base-package="com.jingxi.portal.service" />
+	<context:component-scan base-package="com.jingxi.portal.pojo" />
+	<!-- 配置后包才会生效 -->
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- <mvc:resources location="/WEB-INF/js/" mapping="/js/**" /> <mvc:resources 
+		location="/WEB-INF/css/" mapping="/css/**" /> 定义文件上传解析器 <bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		设定默认编码 <property name="defaultEncoding" value="UTF-8"></property> 设定文件上传的最大值5MB，5*1024*1024 
+		<property name="maxUploadSize" value="5242880"></property> </bean> -->
+	<bean id="jedisClientPool" class="com.jingxi.portal.pojo.JedisClientPool" />
+	<!-- 连接池配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!--最大连接数 -->
+		<property name="maxTotal" value="30" />
+		<!--最大空闲连接数 -->
+		<property name="maxIdle" value="10" />
+		<!--每次释放连接的最大数目 -->
+		<property name="numTestsPerEvictionRun" value="1024" />
+		<!--释放连接的扫描间隔（毫秒） -->
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />
+		<!--连接最小空闲时间 -->
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<!--连接空闲多久后释放, 当空闲时间>该值 且 空闲连接>最大空闲连接数 时直接释放 -->
+		<property name="softMinEvictableIdleTimeMillis" value="10000" />
+		<!--获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 -->
+		<property name="maxWaitMillis" value="1500" />
+		<!--在获取连接的时候检查有效性, 默认false -->
+		<property name="testOnBorrow" value="true" />
+		<!--在空闲时检查有效性, 默认false -->
+		<property name="testWhileIdle" value="true" />
+		<!--连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+		<property name="blockWhenExhausted" value="false" />
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="host" value="192.168.137.147" />
+		<constructor-arg name="port" value="6379" />
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+</beans>

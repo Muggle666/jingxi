@@ -1,0 +1,14 @@
+com\jingxi\service\ContentCategoryService.class
+com\jingxi\service\ItemParamServiceImp.class
+com\jingxi\service\ImageUploadService.class
+com\jingxi\service\ItemService.class
+com\jingxi\service\ItemParamService.class
+com\jingxi\service\ItemCatService.class
+com\jingxi\service\ContentServiceImp.class
+com\jingxi\service\itemServiceImp.class
+com\jingxi\service\ImageUploadServiceImp.class
+com\jingxi\service\ContentCategoryServiceImp.class
+com\jingxi\service\ItemDescServiceImp.class
+com\jingxi\service\ItemDescService.class
+com\jingxi\service\ContentService.class
+com\jingxi\service\ItemCatServiceImp.class
